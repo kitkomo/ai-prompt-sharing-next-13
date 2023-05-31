@@ -32,7 +32,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 						<span className='font-normal'>(#product, #idea, #webdev)</span>
 					</span>
 					<input
-						value={post.prompt}
+						value={post.tag}
 						onChange={e => setPost({ ...post, tag: e.target.value })}
 						placeholder='#tag'
 						required
@@ -41,7 +41,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 				</label>
 				<div className='flex flex-end mx-3 mb-5 gap-4'>
 					<Link href='/' className='text-gray-500 text-sm'>Cancel</Link>
-					<button type='submit' disabled={submitting} className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white'>{submitting ? `${type}...` : type}</button>
+					<button type='submit' disabled={submitting} className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white capitalize'>{submitting ? `${type}...` : type}</button>
 				</div>
 			</form>
 		</section>
