@@ -11,18 +11,6 @@ const handler = NextAuth({
 		})
 	],
 	callbacks: {
-		// async session({ session }) {
-		// 	try {
-		// 		const sessionUser = await User.findOne({
-		// 			email: session.user.email
-		// 		})
-		// 		if (!sessionUser) return
-		// 		session.user.id = sessionUser._id.toString()
-		// 		return session
-		// 	} catch (error) {
-		// 		console.log('Failed to load session', error)
-		// 	}
-		// },
 		async signIn({ profile }) {
 			try {
 				await connectToDb()
