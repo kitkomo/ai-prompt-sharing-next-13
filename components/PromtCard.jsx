@@ -1,9 +1,15 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const PromtCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+	const { data: session } = useSession()
+	const pathName = usePathname()
+	const router = useRouter()
+
 	const [copied, setCopied] = useState('')
 
 	const handleCopy = () => {
@@ -40,7 +46,7 @@ const PromtCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 							}
 							width={12}
 							height={12}
-							alt={copied === post.prompt ? "tick_icon" : "copy_icon"}
+							alt={copied === post.prompt ? 'tick_icon' : 'copy_icon'}
 						/>
 					</div>
 				</div>
@@ -50,8 +56,26 @@ const PromtCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 				className='font-inter text-sm blue_gradient cursor-pointer'
 				onClick={() => handleTagClick && handleTagClick(post.tag)}
 			>
-				{post.tag}
+				#{post.tag}
 			</p>
+
+			{session?.user.email === post.creator.email &&
+				pathName === '/profile' && (
+					<div className='flex justify-center gap-4 mt-5 border-t border-gray-100 pt-3'>
+						<button
+							className='font-inter text-sm green_gradient cursor-pointer'
+							onClick={handleEdit}
+						>
+							Edit
+						</button>
+						<button
+							className='font-inter text-sm orange_gradient cursor-pointer'
+							onClick={handleDelete}
+						>
+							Delete
+						</button>
+					</div>
+				)}
 		</div>
 	)
 }
