@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react'
 import PromtCard from './PromtCard'
 import SkeletonLoader from './Loading/SkeletonLoader'
 
-const PromptCardList = ({ data, handletagsClick }) => {
-	console.log(data)
+const PromptCardList = ({ data }) => {
 	return (
 		<div className='mt-16 prompt_layout'>
 			{data.length > 0 ? (
@@ -14,7 +13,6 @@ const PromptCardList = ({ data, handletagsClick }) => {
 						<PromtCard
 							key={post._id}
 							post={post}
-							handletagsClick={handletagsClick}
 						/>
 					))}
 				</>
@@ -57,7 +55,7 @@ const Feed = () => {
 					className='search_input peer'
 				/>
 			</form>
-			<PromptCardList data={posts} handletagsClick={() => {}} />
+			<PromptCardList data={posts}/>
 		</section>
 	)
 }

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-const PromtCard = ({ post, handletagsClick, handleEdit, handleDelete }) => {
+const PromtCard = ({ post, handleEdit, handleDelete }) => {
 	const { data: session } = useSession()
 	const pathName = usePathname()
 	const router = useRouter()
@@ -55,10 +55,10 @@ const PromtCard = ({ post, handletagsClick, handleEdit, handleDelete }) => {
 			<p className='my-4 font-satoshi text-sm text-gray-700'>{post.prompt}</p>
 			<p
 				className='font-inter text-sm blue_gradient cursor-pointer flex gap-3'
-				onClick={() => handletagsClick && handletagsClick(post.tags)}
+
 			>
 				{post.tags.map(tag => (
-					<Link href='/' key={tag}>
+					<Link href={`/${tag}`} key={tag}>
 						#{tag}
 					</Link>
 				))}
