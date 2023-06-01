@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar'
 import Provider from '@/components/Provider'
 import '@/styles/globals.css'
+import '@/styles/skeletons.css'
 
 export const metadata = {
 	title: 'Promptopia',

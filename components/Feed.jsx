@@ -2,17 +2,30 @@
 
 import { useEffect, useState } from 'react'
 import PromtCard from './PromtCard'
+import SkeletonLoader from './Loading/SkeletonLoader'
 
 const PromptCardList = ({ data, handletagsClick }) => {
+	console.log(data)
 	return (
 		<div className='mt-16 prompt_layout'>
-			{data.map(post => (
-				<PromtCard
-					key={post._id}
-					post={post}
-					handletagsClick={handletagsClick}
+			{data.length > 0 ? (
+				<>
+					{data.map(post => (
+						<PromtCard
+							key={post._id}
+							post={post}
+							handletagsClick={handletagsClick}
+						/>
+					))}
+				</>
+			) : (
+				<SkeletonLoader
+					count={5}
+					inline
+					className='skeletonLoader'
+					containerClassName='containerLoader'
 				/>
-			))}
+			)}
 		</div>
 	)
 }

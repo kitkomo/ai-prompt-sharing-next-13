@@ -4,9 +4,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
+import SkeletonLoader from './Loading/SkeletonLoader'
 
 const Navbar = () => {
-	const {data: session} = useSession()
+	const { data: session } = useSession()
 	const [providers, setProviders] = useState(null)
 	const [toggleDropdown, setToggleDropdown] = useState(false)
 
@@ -14,7 +15,6 @@ const Navbar = () => {
 		const fetchProviders = async () => {
 			const response = await getProviders()
 			setProviders(response)
-			// console.log(response)
 		}
 		fetchProviders()
 	}, [])
@@ -53,7 +53,7 @@ const Navbar = () => {
 					</div>
 				) : (
 					<>
-						{providers &&
+						{providers ? (
 							Object.values(providers).map(provider => (
 								<button
 									type='button'
@@ -63,7 +63,14 @@ const Navbar = () => {
 								>
 									Sign In
 								</button>
-							))}
+							))
+						) : (
+							<SkeletonLoader
+								count={1}
+								className='w-full h-10 rounded-full'
+								containerClassName='w-24 h-10 rounded-full'
+							/>
+						)}
 					</>
 				)}
 			</div>
@@ -109,7 +116,7 @@ const Navbar = () => {
 					</div>
 				) : (
 					<>
-						{providers &&
+						{providers ? (
 							Object.values(providers).map(provider => (
 								<button
 									type='button'
@@ -119,7 +126,14 @@ const Navbar = () => {
 								>
 									Sign In
 								</button>
-							))}
+							))
+						) : (
+							<SkeletonLoader
+								count={1}
+								className='w-full h-10 rounded-full'
+								containerClassName='w-24 h-10 rounded-full'
+							/>
+						)}
 					</>
 				)}
 			</div>

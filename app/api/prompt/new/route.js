@@ -13,8 +13,6 @@ export const POST = async (req, res) => {
 		})
 
 		const formattedTags = tags.split(' ')
-		console.log(formattedTags)
-		console.log(userId)
 	
 		const newPrompt = new Prompt({
 			creator: userId,

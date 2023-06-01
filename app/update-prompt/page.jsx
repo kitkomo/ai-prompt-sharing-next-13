@@ -8,6 +8,7 @@ const EditPromptPage = () => {
 	const searchParams = useSearchParams()
 	const promptId = searchParams.get('id')
 
+	const [isLoading, setIsLoading] = useState(true)
 	const [submitting, setSubmitting] = useState(false)
 	const [post, setPost] = useState({
 		prompt: '',
@@ -22,6 +23,7 @@ const EditPromptPage = () => {
 				prompt: data.prompt,
 				tags: data.tags.join(' ')
 			})
+			setIsLoading(false)
 		}
 
 		if (promptId) getPromptDetails()
@@ -57,6 +59,7 @@ const EditPromptPage = () => {
 			setPost={setPost}
 			submitting={submitting}
 			handleSubmit={updatePrompt}
+			isLoading={isLoading}
 		/>
 	)
 }
