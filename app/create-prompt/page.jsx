@@ -11,7 +11,7 @@ const CreatePromptPage = () => {
 	const [submitting, setSubmitting] = useState(false)
 	const [post, setPost] = useState({
 		prompt: '',
-		tag: ''
+		tags: ''
 	})
 
 	const createPrompt = async e => {
@@ -24,7 +24,7 @@ const CreatePromptPage = () => {
 				body: JSON.stringify({
 					prompt: post.prompt,
 					userEmail: session?.user.email,
-					tag: post.tag
+					tags: post.tags
 				})
 			})
 

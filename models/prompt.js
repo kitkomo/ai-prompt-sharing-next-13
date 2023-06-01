@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from "mongoose";
+import mongoose, { Schema, model, models } from 'mongoose'
 
 const PromptSchema = new Schema({
 	creator: {
@@ -9,9 +9,9 @@ const PromptSchema = new Schema({
 		type: String,
 		required: [true, 'Prompt is required']
 	},
-	tag: {
-		type: String,
-		required: [true, 'tag is required']
+	tags: {
+		type: [String],
+		required: [true, 'At least one tag is required']
 	}
 })
 

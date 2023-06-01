@@ -3,11 +3,15 @@
 import { useEffect, useState } from 'react'
 import PromtCard from './PromtCard'
 
-const PromptCardList = ({ data, handleTagClick }) => {
+const PromptCardList = ({ data, handletagsClick }) => {
 	return (
 		<div className='mt-16 prompt_layout'>
 			{data.map(post => (
-				<PromtCard key={post._id} post={post} handleTagClick={handleTagClick} />
+				<PromtCard
+					key={post._id}
+					post={post}
+					handletagsClick={handletagsClick}
+				/>
 			))}
 		</div>
 	)
@@ -33,14 +37,14 @@ const Feed = () => {
 			<form className='relative w-full flex-center'>
 				<input
 					type='text'
-					placeholder='Search for tag or username'
+					placeholder='Search for tags or username'
 					value={searchText}
 					onChange={handleSearchChange}
 					required
 					className='search_input peer'
 				/>
 			</form>
-			<PromptCardList data={posts} handleTagClick={() => {}} />
+			<PromptCardList data={posts} handletagsClick={() => {}} />
 		</section>
 	)
 }

@@ -2,10 +2,11 @@
 
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-const PromtCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+const PromtCard = ({ post, handletagsClick, handleEdit, handleDelete }) => {
 	const { data: session } = useSession()
 	const pathName = usePathname()
 	const router = useRouter()
@@ -53,10 +54,14 @@ const PromtCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 			</div>
 			<p className='my-4 font-satoshi text-sm text-gray-700'>{post.prompt}</p>
 			<p
-				className='font-inter text-sm blue_gradient cursor-pointer'
-				onClick={() => handleTagClick && handleTagClick(post.tag)}
+				className='font-inter text-sm blue_gradient cursor-pointer flex gap-3'
+				onClick={() => handletagsClick && handletagsClick(post.tags)}
 			>
-				#{post.tag}
+				{post.tags.map(tag => (
+					<Link href='/' key={tag}>
+						#{tag}
+					</Link>
+				))}
 			</p>
 
 			{session?.user.email === post.creator.email &&

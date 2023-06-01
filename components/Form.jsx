@@ -1,4 +1,4 @@
-import Link	from 'next/link'
+import Link from 'next/link'
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 	return (
@@ -28,20 +28,27 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 				</label>
 				<label>
 					<span className='font-satoshi font-semibold text-base text-gray-700'>
-						Tag{' '}
-						<span className='font-normal'>(#product, #idea, #webdev)</span>
+						Tags
 					</span>
 					<input
-						value={post.tag}
-						onChange={e => setPost({ ...post, tag: e.target.value })}
-						placeholder='#tag'
+						value={post.tags}
+						onChange={e => setPost({ ...post, tags: e.target.value })}
+						placeholder='product idea webdev'
 						required
 						className='form_input'
 					/>
 				</label>
 				<div className='flex flex-end mx-3 mb-5 gap-4'>
-					<Link href='/' className='text-gray-500 text-sm'>Cancel</Link>
-					<button type='submit' disabled={submitting} className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white capitalize'>{submitting ? `${type}...` : type}</button>
+					<Link href='/' className='text-gray-500 text-sm'>
+						Cancel
+					</Link>
+					<button
+						type='submit'
+						disabled={submitting}
+						className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white capitalize'
+					>
+						{submitting ? `${type}...` : type}
+					</button>
 				</div>
 			</form>
 		</section>

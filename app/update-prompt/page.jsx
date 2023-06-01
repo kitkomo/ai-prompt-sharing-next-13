@@ -11,7 +11,7 @@ const EditPromptPage = () => {
 	const [submitting, setSubmitting] = useState(false)
 	const [post, setPost] = useState({
 		prompt: '',
-		tag: ''
+		tags: []
 	})
 
 	useEffect(() => {
@@ -20,7 +20,7 @@ const EditPromptPage = () => {
 			const data = await res.json()
 			setPost({
 				prompt: data.prompt,
-				tag: data.tag
+				tags: data.tags.join(' ')
 			})
 		}
 
@@ -38,7 +38,7 @@ const EditPromptPage = () => {
 				method: 'PATCH',
 				body: JSON.stringify({
 					prompt: post.prompt,
-					tag: post.tag
+					tags: post.tags
 				})
 			})
 
