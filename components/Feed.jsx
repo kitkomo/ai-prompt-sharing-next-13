@@ -4,17 +4,20 @@ import { useEffect, useState } from 'react'
 import PromtCard from './PromtCard'
 import SkeletonLoader from './Loading/SkeletonLoader'
 
-const PromptCardList = ({ data }) => {
+const PromptCardList = ({ data, loaded }) => {
 	return (
 		<div className='mt-16 prompt_layout'>
 			{data.length > 0 ? (
 				<>
 					{data.map(post => (
-						<PromtCard
-							key={post._id}
-							post={post}
-						/>
+						<PromtCard key={post._id} post={post} />
 					))}
+				</>
+			) : loaded ? (
+				<>
+					<p className='desc text-center'></p>
+					<p className='desc text-center'>No such prompts</p>
+					<p className='desc text-center'></p>
 				</>
 			) : (
 				<SkeletonLoader
@@ -31,14 +34,19 @@ const PromptCardList = ({ data }) => {
 const Feed = () => {
 	const [searchText, setSearchText] = useState('')
 	const [posts, setPosts] = useState([])
+	const [loaded, setLoaded] = useState(false)
 
-	const handleSearchChange = e => {}
+	const handleSearchChange = e => {
+		e.preventDefault()
+		setSearchText(e.target.value)
+	}
 
 	useEffect(() => {
 		const fetchPosts = async () => {
-			const response = await fetch('/api/prompt')
+			const response = await fetch(`/api/prompt`)
 			const data = await response.json()
 			setPosts(data)
+			setLoaded(true)
 		}
 		fetchPosts()
 	}, [])
@@ -55,7 +63,14 @@ const Feed = () => {
 					className='search_input peer'
 				/>
 			</form>
-			<PromptCardList data={posts}/>
+			<PromptCardList
+				data={posts.filter(
+					post =>
+						post.tags.join(' ').toLowerCase().includes(searchText) ||
+						post.creator.username.toLowerCase().includes(searchText)
+				)}
+				loaded={loaded}
+			/>
 		</section>
 	)
 }
